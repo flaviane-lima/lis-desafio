@@ -8,6 +8,10 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
+// importa as rotas
+import userRoutes from "./routes/user";
+import userProfileRoutes from "./routes/userProfile";
+
 app.use(cors({
   origin: "http://localhost:4200", // endereço do frontend Angular
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -31,5 +35,10 @@ export const AppDataSource = new DataSource({
 
 AppDataSource.initialize().then(() => {
   console.log("Banco conectado!");
+
+  //registar as rotas
+  app.use("/users", userRoutes);
+  app.use("/profiles", userProfileRoutes);
+  
   app.listen(3000, () => console.log("Servidor rodando na porta 3000"));
 });
