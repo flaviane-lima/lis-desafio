@@ -1,6 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique } from "typeorm";
+import { UserProfile } from "./UserProfile";
 
-@Entity()
+@Entity("user")
+@Unique(["email"])
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -10,4 +12,10 @@ export class User {
 
   @Column()
   email!: string;
+
+  @Column()
+  pass!: string;
+
+  @ManyToOne(() => UserProfile, (profile) => profile.users, { eager: true})
+  userProfile!: UserProfile;
 }
