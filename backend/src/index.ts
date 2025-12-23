@@ -11,6 +11,7 @@ app.use(cors());
 // importa as rotas
 import userRoutes from "./routes/user";
 import userProfileRoutes from "./routes/userProfile";
+import authRoutes from "./routes/auth";
 
 app.use(cors({
   origin: "http://localhost:4200", // endereço do frontend Angular
@@ -39,6 +40,7 @@ AppDataSource.initialize().then(() => {
   //registar as rotas
   app.use("/users", userRoutes);
   app.use("/profiles", userProfileRoutes);
+  app.use("./auth", authRoutes);
   
   app.listen(3000, () => console.log("Servidor rodando na porta 3000"));
 });
