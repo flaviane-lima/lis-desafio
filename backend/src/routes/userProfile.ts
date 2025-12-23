@@ -1,18 +1,19 @@
 import { Router } from "express";
 import { AppDataSource } from "..";
 import { UserProfile } from "../entities/UserProfile";
+import { requireAuth, requireAdmin } from "../middleware/auth";
 
 const router = Router();
 
 //lista todos os perfis
-router.get("/", async(__dirname, res) => {
+router.get("/", requireAuth, async (req, res) => {
     const profiles = await AppDataSource.getRepository(UserProfile).find();
     res.json(profiles);
 
 });
 
 //post/ cria um novo perfil.
-router.post("/", async (req, res) => {
+router.post("/", requireAdmin, async (req, res) => {
     const { name } = req.body;
 
     if (!name) {
