@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique } from "typeorm";
 import { UserProfile } from "./UserProfile";
 
-@Entity("user")
+@Entity("users")
 @Unique(["email"])
 export class User {
   @PrimaryGeneratedColumn()
